@@ -33,7 +33,7 @@ jobs:
           ignore-unfixed: false
 
       - name: Upload Trivy Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: trivy-reports
           path: |
