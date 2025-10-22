@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Scan Docker image with Trivy
+      - name: Run Trivy Table Report
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: python:3.11-slim
@@ -22,7 +22,7 @@ jobs:
           severity: CRITICAL,HIGH,MEDIUM,LOW
           ignore-unfixed: false
 
-      - name: Save JSON report
+      - name: Run Trivy JSON Report
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: python:3.11-slim
@@ -31,3 +31,11 @@ jobs:
           exit-code: 0
           severity: CRITICAL,HIGH,MEDIUM,LOW
           ignore-unfixed: false
+
+      - name: Upload Trivy Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-reports
+          path: |
+            results.txt
+            results.json
